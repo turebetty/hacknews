@@ -16,8 +16,8 @@ export default class Root extends Component {
           <Router history={hashHistory}>
             <Route path="/hacknews/" component={App}>
               <IndexRoute component={Stories}/>
-              <Route path="Stories" component={Stories}/>
-              <Route path="Comments" component={Comments}/>
+              <Route path="stories" component={Stories}/>
+              <Route path="comments" component={Comments}/>
             </Route>
           </Router>
         </div>

@@ -2,30 +2,37 @@ import HNFetch from '../../utils/HNFetch';
 import * as types from '../../constants/ActionTypes';
 import * as api from '../../constants/ApiServer';
 
-function requestTopStories() {
+function receiveStories(json, storyType) {
   return {
-    type: types.REQUEST_TOP_STORIES,
-    receivedAt: Date.now()
-  };
-}
-
-function receiveTopStories(json) {
-  return {
-    type: types.RECEIVE_TOP_STORIES,
+    type: types.RECEIVE_STORIES,
     data: json,
+    storyType: storyType,
     receivedAt: Date.now()
   };
 }
-
-function fetchTopStoriesData(params_) {
+function fetchStoriesData(storyType) {
   return dispatch => {
-    dispatch(requestTopStories());
+    let url = '';
+    switch(storyType){
+    case 0:
+      url = api.newStoriesUri;
+      break;
+    case 1:
+      url = api.topStoriesUri;
+      break;
+    case 2:
+      url = api.bestStoriesUri;
+      break;
+    default: break;
+    }
     return HNFetch({
       type: 'GET',
-      url: api.topStoriesUri,
-    }).then(json =>{console.log(json);dispatch(receiveTopStories(json))});
+      url: url,
+    }).then(json =>{
+      dispatch(receiveStories(json, storyType))
+    });
   };
 }
-export function fetchTopStories(params_) {
-  return (dispatch) => dispatch(fetchTopStoriesData(params_));
+export function fetchStories(storyType) {
+  return (dispatch) => dispatch(fetchStoriesData(storyType));
 }

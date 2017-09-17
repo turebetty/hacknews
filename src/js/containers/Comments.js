@@ -10,7 +10,6 @@ class Comments extends React.Component {
     super(props);
   }
   componentDidMount() {
-    alert('111');
   }
   render() {
     const{ CommentsData } = this.props;
