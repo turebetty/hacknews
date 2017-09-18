@@ -19,13 +19,17 @@
         @include ellipsis(2);
       }
     }
-    .cp-comment{
-      .title{
-        max-height: 42px;
-        height: 42px;
-        color: #834C4C;
-        @include ellipsis(2);
-      }
+    .cp-comment-box{
+      width: 100%;
+      max-width: 640px;
+      @include centerX();
+      display: block;
+    }
+    .cp-comment .title{
+      max-height: 42px;
+      height: 42px;
+      color: #834C4C;
+      @include ellipsis(2);
     }
   }
   ul{

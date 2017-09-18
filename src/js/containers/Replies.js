@@ -11,16 +11,30 @@ import Comment from '../components/bussiness/Comment';
 class Replies extends React.Component {
   constructor(props) {
     super(props);
-     //获取url的参数
-    this.params = HNUrlToos.getParamString();
+    //获取url的参数
+    this.commentId = this.props.params.id;
+
   }
-  componentDidMount() {
-    const{ fetchItems, initComments } = this.props;
-    //清空缓存数据
+  componentWillMount(){
+    //进入页面，初始化comments数据
+    const{ initComments } = this.props;
     initComments();
+  }
+
+  componentDidMount() {
+    const{ fetchItems } = this.props;
     //进入页面，根据id获取数据，fetchItems判断是localstorage拿，还是走fetch
-    let items = [this.params.id];
+    let items = [this.commentId];
     fetchItems(items, 0);
+  }
+  componentWillReceiveProps(nextProps){
+    if(this.props.params.id !== nextProps.params.id){
+      // 如果id更新，重置commments数据，并获取新的数据
+      const{ initComments, fetchItems } = this.props;
+      initComments();
+      let items = [nextProps.params.id];
+      fetchItems(items, 0);
+    }
   }
   _renderWaypoint() {
     const {CommentsData, fetchItems} = this.props;
