@@ -7,16 +7,16 @@ import * as HNUrlToos from '../utils/HNUrlToos';
 import * as fetchCommentsActions from '../redux/actions/fetchComments';
 import * as fetchItemsActions from '../redux/actions/fetchItems';
 import Comment from '../components/bussiness/Comment';
-import Story from '../components/bussiness/Story';
 
-class Comments extends React.Component {
+class Replies extends React.Component {
   constructor(props) {
     super(props);
-    //获取url的参数
+     //获取url的参数
     this.params = HNUrlToos.getParamString();
   }
   componentDidMount() {
     const{ fetchItems, initComments } = this.props;
+    //清空缓存数据
     initComments();
     //进入页面，根据id获取数据，fetchItems判断是localstorage拿，还是走fetch
     let items = [this.params.id];
@@ -41,11 +41,11 @@ class Comments extends React.Component {
     return (
       <div className="pg-comments">
         {CommentsData.parentData? <div className="parent">
-          <Story data={CommentsData.parentData}/>
+          <Comment data={CommentsData.parentData}/>
         </div>:null}
         <ul>
           {CommentsData.items.map((data)=>{
-            return <Comment data={data.data} key = {data.id}/>
+            return <Comment data={data.data} type="reply" key = {data.id}/>
           })}
         </ul>
         {this._renderWaypoint()}
@@ -53,15 +53,13 @@ class Comments extends React.Component {
     );
   }
 }
-Comments.propTypes  = {
-  CommentsData: PropTypes.object.isRequired,
-  StoriesData: PropTypes.object.isRequired,
+Replies.propTypes  = {
+  CommentsData: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    CommentsData: state.CommentsData,
-    StoriesData: state.StoriesData,
+    CommentsData: state.CommentsData
   };
 }
 
@@ -69,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign({}, fetchCommentsActions, fetchItemsActions), dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(mapStateToProps, mapDispatchToProps)(Replies);

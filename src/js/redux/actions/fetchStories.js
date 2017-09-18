@@ -33,6 +33,13 @@ function fetchStoriesData(storyType) {
     });
   };
 }
+/**
+ * 获取各种类型列表的story的ids
+ *
+ * @export
+ * @param {0,1,2} storyType 0表示story,1表示comment,2表示reply
+ * @returns
+ */
 export function fetchStories(storyType) {
   return (dispatch) => dispatch(fetchStoriesData(storyType));
 }

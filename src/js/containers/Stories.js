@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Waypoint from 'react-waypoint';
-
 import * as fetchStoriesActions from '../redux/actions/fetchStories';
 import * as fetchItemsActions from '../redux/actions/fetchItems';
-
 import Tabs from '../components/base/Tabs';
 import Story from '../components/bussiness/Story';
 
@@ -25,13 +23,12 @@ class Stories extends React.Component {
   }
   componentDidMount() {
     const {fetchStories} = this.props;
+    //进入获取new stories的数据
     fetchStories(0);
-  }
-  componentDidUpdate(){
-    // const {StoriesData} = this.props;
   }
   indexChange(index){
     const {StoriesData, fetchStories} = this.props;
+    //切换tab后，若本tab下的story尚未获取过数据，则开始获取
     if(StoriesData.list[index].start === 0){
       fetchStories(index);
     }
@@ -39,18 +36,14 @@ class Stories extends React.Component {
       selectedIndex:index,
     });
   }
-  setNext(obj){
-    obj.nextList = obj.list.slice(obj.start, obj.start+obj.limit);
-    obj.start = obj.start+obj.limit;
-    return obj;
-  }
   _renderWaypoint() {
     const {StoriesData, fetchItems} = this.props;
     let storyType = this.state.selectedIndex;
+    //开锁状态，并且有nextList，就开始获取数据
     if(StoriesData.canRequestItems && StoriesData.list[storyType].nextList && StoriesData.list[storyType].nextList.length >0){
       return (
         <Waypoint
-          onEnter={ () => fetchItems(StoriesData.list[storyType].nextList, storyType)}
+          onEnter={ () => fetchItems(StoriesData.list[storyType].nextList, 1, storyType)}
           threshold={2}/>
       );
     }
@@ -61,9 +54,10 @@ class Stories extends React.Component {
       <div className="pg-stories">
         <Tabs tapItems={tapItems} selectedIndex={this.state.selectedIndex} indexChange={(index)=>this.indexChange(index)} isFixed='true'/>
         <ul className="story-list">{
-          StoriesData.list[this.state.selectedIndex].items.map((item)=>{
+          StoriesData.list[this.state.selectedIndex].items.map((item, index)=>{
             let data = item.data;
             data.storyType = this.state.selectedIndex;
+            data.index = index;
             return <Story data={data} key = {data.id}/>
           })}
           {this._renderWaypoint()}

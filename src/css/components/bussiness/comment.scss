@@ -1,5 +1,5 @@
 @import '../../scss-base.scss';
-.cp-story{
+.cp-comment{
   padding: 20px 12px;
   background-color: #fff;
   display: block;
@@ -13,9 +13,12 @@
     margin-left: 35px;
   }
   .title{
+    *{
+      word-break: break-word;
+    }
     font-size: 15px;
     line-height: 21px;
-    color: #834C4C;
+    color: #4a4a4a;
   }
   .time{
     color: #bbbbbb;

@@ -22,7 +22,7 @@ const Story = (props) =>{
           <img className="icon l" src={require('../../../../public/img/like.png')}></img>
           <p className="l">{data.score}</p>
           <a href={`#/hacknews/comments?id=${data.id}`}>
-            <img className="icon l" src={require('../../../../public/img/message.png')}></img>
+            <img className="icon l" src={require('../../../../public/img/comments.png')}></img>
             <p className="l">{data.descendants}</p>
           </a>
         </div>

@@ -39,34 +39,33 @@
 
 
   /**
-   * 获取url中的参数
-   * @param {any} url
-   * @returns 所有参数的对象
+   * 获取url中的参数的值
+   * @param {any} name
+   * @returns 参数的值
    */
-  HNUrlTools.getParams = function(url) {
-    if (!url) url = window.location.href;
-    var opts = {},
-      name, value;
-    url = url.split('#')[0];
-    var idx = url.indexOf('?'),
-      search = idx > -1 ? url.substr(idx + 1) : '',
-      arrtmp = search.split('&');
-    for (var i = 0; i < arrtmp.length; i++) {
-      var paramCount = arrtmp[i].indexOf('=');
-      if (paramCount > 0) {
-        name = arrtmp[i].substring(0, paramCount);
-        value = arrtmp[i].substr(paramCount + 1);
-        try {
-          if (value.indexOf('+') > -1) {
-            value = value.replace(/\+/g, ' ');
-          }
-          opts[name] = decodeURIComponent(value);
-        } catch (exp) {
-          console.log('error');
-        }
+  HNUrlTools.getParamString = function(name) {
+    let search = location.search; //获取url中'?'符后的字串
+    let hash = location.hash; //获取url中'?'符后的字串
+    let theRequest = new Object();
+    if (search.indexOf('?') != -1) {
+      let str = search.substr(1);
+      let strs = str.split('&');
+      for(let i = 0; i < strs.length; i ++) {
+        theRequest[strs[i].split('=')[0]]=unescape(strs[i].split('=')[1]);
+      }
+      if(typeof theRequest === 'undefined'){
+        return theRequest;
       }
     }
-    return opts;
+    if((JSON.stringify(theRequest) === '{}' || theRequest === ''|| typeof theRequest === 'undefined') && hash){
+      let str = hash.split('?')[1];
+      let strs = str.split('&');
+      for(let i = 0; i < strs.length; i ++) {
+        theRequest[strs[i].split('=')[0]]=unescape(strs[i].split('=')[1]);
+      }
+      return theRequest;
+    }
+
   };
 
   /**

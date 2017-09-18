@@ -105,6 +105,47 @@ img {
 .pg-stories .story-list {
   margin-top: 45px; }
 
+.pg-comments .parent {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 125px;
+  overflow: hidden;
+  z-index: 99;
+  background-color: #fff; }
+  .pg-comments .parent .cp-story-box {
+    width: 100%;
+    max-width: 640px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    -o-transform: translate(-50%, 0%);
+    display: table;
+    position: absolute;
+    display: block; }
+    .pg-comments .parent .cp-story-box .title {
+      height: 42px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; }
+  .pg-comments .parent .cp-comment .title {
+    max-height: 42px;
+    height: 42px;
+    color: #834C4C;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; }
+
+.pg-comments ul {
+  padding-top: 125px; }
+
 #cp-tabs {
   background-color: #fff;
   box-sizing: border-box;
@@ -165,8 +206,7 @@ img {
   .cp-story .title {
     font-size: 15px;
     line-height: 21px;
-    color: #4a4a4a;
-    height: 42px; }
+    color: #834C4C; }
   .cp-story .time {
     color: #bbbbbb;
     font-size: 12px;
@@ -187,14 +227,39 @@ img {
     .cp-story .bottom-right-info p:last-child {
       margin-right: 0px; }
 
-@media screen and (min-width: 400px) {
-  .cp-story-box {
-    width: 50%;
-    float: left; }
-    .cp-story-box .title {
-      height: 42px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical; } }
+.cp-comment {
+  padding: 20px 12px;
+  background-color: #fff;
+  display: block;
+  overflow: hidden;
+  position: relative; }
+  .cp-comment .icon {
+    width: 25px;
+    height: 25px; }
+  .cp-comment .right {
+    margin-left: 35px; }
+  .cp-comment .title {
+    font-size: 15px;
+    line-height: 21px;
+    color: #4a4a4a; }
+    .cp-comment .title * {
+      word-break: break-word; }
+  .cp-comment .time {
+    color: #bbbbbb;
+    font-size: 12px;
+    line-height: 17px; }
+  .cp-comment .by {
+    color: #444444;
+    font-size: 12px;
+    line-height: 25px; }
+  .cp-comment .bottom-right-info {
+    position: absolute;
+    right: 12px;
+    bottom: 20px; }
+    .cp-comment .bottom-right-info p {
+      color: #777;
+      font-size: 12px;
+      line-height: 25px;
+      margin-right: 5px; }
+    .cp-comment .bottom-right-info p:last-child {
+      margin-right: 0px; }

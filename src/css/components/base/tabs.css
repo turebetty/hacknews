@@ -9,6 +9,15 @@
     width: 100%;
     z-index: 99; }
   #cp-tabs .cp-tabs {
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    -o-transform: translate(-50%, 0%);
+    display: table;
+    position: absolute;
+    display: block;
     max-width: 640px;
     margin: 0px 12px;
     position: relative;
