@@ -26,7 +26,7 @@ html {
   font-size: 62.5%; }
 
 body {
-  background: #f5f5f5;
+  background: #fff;
   max-width: 640px;
   margin: 0 auto;
   font-family: -apple-system-font, "PingFang SC", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
@@ -37,17 +37,15 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden; }
 
-a, img, button, input, textarea, p, div {
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  cursor: pointer; }
-
-a, img {
-  -webkit-touch-callout: none; }
-
 a {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
   background: transparent;
   text-decoration: none;
   color: #444; }
+
+a, img {
+  -webkit-touch-callout: none; }
 
 a:active, a:hover {
   outline: 0; }

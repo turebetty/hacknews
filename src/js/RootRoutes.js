@@ -6,18 +6,19 @@ import configureStore from '../js/redux/configureStore/index';
 import App from './App';
 import Stories from './containers/Stories';
 import Comments from './containers/Comments';
-
+import Replies from './containers/Replies';
+const store = configureStore();
 export default class Root extends Component {
   render() {
-    const store = configureStore();
     return (
       <Provider store={store}>
         <div>
           <Router history={hashHistory}>
             <Route path="/hacknews/" component={App}>
               <IndexRoute component={Stories}/>
-              <Route path="Stories" component={Stories}/>
-              <Route path="Comments" component={Comments}/>
+              <Route path="stories" component={Stories}/>
+              <Route path="comments" component={Comments}/>
+              <Route path="replies" component={Replies}/>
             </Route>
           </Router>
         </div>
