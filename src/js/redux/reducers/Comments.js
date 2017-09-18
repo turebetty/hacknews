@@ -57,8 +57,16 @@ export default function CommentsData(state = initialState, action) {
   }
   case types.INIT_COMMENTS:{
     //初始化
-    commentsCache = initialState;
-    return Object.assign({}, state, initialState);
+    commentsCache = {
+      parentData: {}, //父层用的数据
+      list: [], //子层列表的ids list
+      items: [], //子层列表的具体信息 list
+      start: 0,
+      limit: 12,
+      nextList: [], //下次请求的子层的ids list
+      canRequestItems: true, //加锁
+    };
+    return Object.assign({}, state, commentsCache);
   }
   default:
     return state;

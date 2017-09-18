@@ -13,14 +13,17 @@ class Comments extends React.Component {
   constructor(props) {
     super(props);
     //获取url的参数
-    this.params = HNUrlToos.getParamString();
+    this.storyId = this.props.params.id;
   }
   componentDidMount() {
-    const{ fetchItems, initComments } = this.props;
-    initComments();
+    const{ fetchItems } = this.props;
     //进入页面，根据id获取数据，fetchItems判断是localstorage拿，还是走fetch
-    let items = [this.params.id];
+    let items = [this.storyId];
     fetchItems(items, 0);
+  }
+  componentWillMount(){
+    const{ initComments } = this.props;
+    initComments();
   }
   _renderWaypoint() {
     const {CommentsData, fetchItems} = this.props;

@@ -21,9 +21,9 @@ const Story = (props) =>{
         <div className="bottom-right-info clr">
           <img className="icon l" src={require('../../../../public/img/like.png')}></img>
           <p className="l">{data.score}</p>
-          <a href={`#/hacknews/comments?id=${data.id}`}>
+          <a href={data.kids && data.kids.length!==0? `#/hacknews/comments/${data.id}/`:'javascript:void(0)'}>
             <img className="icon l" src={require('../../../../public/img/comments.png')}></img>
-            <p className="l">{data.descendants}</p>
+            <p className="l">{data.kids? data.kids.length:0}</p>
           </a>
         </div>
       </div>
