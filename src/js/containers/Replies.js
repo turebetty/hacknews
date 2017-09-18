@@ -16,6 +16,7 @@ class Replies extends React.Component {
 
   }
   componentWillMount(){
+    //进入页面，初始化comments数据
     const{ initComments } = this.props;
     initComments();
   }
@@ -28,9 +29,9 @@ class Replies extends React.Component {
   }
   componentWillReceiveProps(nextProps){
     if(this.props.params.id !== nextProps.params.id){
+      // 如果id更新，重置commments数据，并获取新的数据
       const{ initComments, fetchItems } = this.props;
       initComments();
-      //进入页面，根据id获取数据，fetchItems判断是localstorage拿，还是走fetch
       let items = [nextProps.params.id];
       fetchItems(items, 0);
     }
